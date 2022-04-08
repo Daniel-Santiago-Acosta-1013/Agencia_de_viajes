@@ -1,8 +1,33 @@
 import {Viaje} from '../models/Viaje.js'
+import { Testimonial } from '../models/Testimoniales.js';
 
-const paginaInicio = (req, res) => { 
+const paginaInicio = async(req, res) => { 
+
+    // Consultar 3 Viajes del modelo viaje
+
+    const promiseDB = []
+
+    promiseDB.push( Viaje.findAll({ limit: 3 }) );
+    promiseDB.push( Testimonial.findAll({ limit: 3 }) );
+
+
+    try {
+         const resultado = await Promise.all( promiseDB );
+
+        res.render('inicio', {
+            pagina: 'Inicio',
+            clase: 'home',
+            viajes: resultado[0],
+            testimoniales: resultado[1]
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
     res.render('inicio', {
-        pagina: 'Inicio'
+        pagina: 'Inicio',
+        clase: 'home'
     });
 }
 
@@ -16,18 +41,25 @@ const PaginaViajes = async (req, res) => {
     // Consultar DB
     const viajes = await Viaje.findAll();
 
-    console.log(viajes)
-
     res.render('viajes', { 
         pagina: 'Proximos viajes',
         viajes,
     });
 }
 
-const PaginaTestimoniales = (req, res) => {
-    res.render('testimoniales',{ 
-        pagina: 'Testimoniales'
-    });
+const PaginaTestimoniales = async (req, res) => {
+
+    try {
+        const testimoniales = await Testimonial.findAll();
+
+        res.render('testimoniales',{ 
+            pagina: 'Testimoniales',
+            testimoniales
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 // Muestra un viaje por su slug 
