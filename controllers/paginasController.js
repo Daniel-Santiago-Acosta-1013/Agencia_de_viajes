@@ -1,3 +1,4 @@
+import {Viaje} from '../models/Viaje.js'
 
 const paginaInicio = (req, res) => { 
     res.render('inicio', {
@@ -11,9 +12,15 @@ const PaginaNosotros = (req, res) => {
     });
 }
 
-const PaginaViajes = (req, res) => {
-    res.render('viajes',{ 
-        pagina: 'Viajes'
+const PaginaViajes = async (req, res) => {
+    // Consultar DB
+    const viajes = await Viaje.findAll();
+
+    console.log(viajes)
+
+    res.render('viajes', { 
+        pagina: 'Proximos viajes',
+        viajes,
     });
 }
 
