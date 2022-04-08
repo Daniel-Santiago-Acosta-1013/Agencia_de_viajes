@@ -23,8 +23,10 @@ app.use((req, res, next) => {
     res.locals.actualYear = year.getFullYear();
     res.locals.nombresitio = "Agecia de viajes";
     return next();
-})
+});
 
+// Agregar body parser para leer los datos del formulario
+app.use(express.urlencoded({extended: true}));
 
 // Definir la carpeta publica
 app.use(express.static('public'));

@@ -12,12 +12,12 @@ block contenido
                     form(action="/testimoniales" method="POST")
                         .form-group
                             label(for="nombre") Nombre
-                            imput#nombre(type="text", placeholder="Tu Nombre", name="nombre", class="form-control") 
+                            input#nombre(type="text", placeholder="Tu Nombre", name="nombre", class="form-control") 
                         .form-group
-                            label(for="nombre") Correo electronico
-                            imput#correo(type="text", placeholder="Tu Correo", name="correo", class="form-control") 
+                            label(for="correo") Correo electronico
+                            input#correo(type="text", placeholder="Tu Correo", name="correo", class="form-control") 
                         .form-group
-                            label(for="nombre") Correo electronico
+                            label(for="mensaje") Mensaje
                             textarea#mensaje(class="form-control", name="mensaje", placeholder="Tu Mensaje", rows=3) 
 
                         input.btn.btn-success.btn-block(type="submit")
