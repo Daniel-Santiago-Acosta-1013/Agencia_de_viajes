@@ -1,7 +1,23 @@
 import {Viaje} from '../models/Viaje.js'
 import { Testimonial } from '../models/Testimoniales.js';
 
-const paginaInicio = (req, res) => { 
+const paginaInicio = async(req, res) => { 
+
+    // Consultar 3 Viajes del modelo viaje
+
+    try {
+        const viajes = await Viaje.findAll({ limit: 3});
+
+        res.render('inicio', {
+            pagina: 'Inicio',
+            clase: 'home',
+            viajes
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
     res.render('inicio', {
         pagina: 'Inicio',
         clase: 'home'
